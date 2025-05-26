@@ -1,14 +1,14 @@
 server:
-  port: 8084
+  port: 8085
 
 spring:
   application:
-    name: comparison-service
+    name: schedule-service
 
   datasource:
-    url: jdbc:postgresql://postgres-comparison:5432/comparison_db
-    username: comparison_db
-    password: comparison_password12345@@
+    url: jdbc:postgresql://postgres-schedule:5432/schedule_db
+    username: schedule_db
+    password: schedule_password12345@@
     driver-class-name: org.postgresql.Driver
 
   jpa:

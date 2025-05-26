@@ -9,5 +9,5 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/devloperHicham/config-data.git  # Git repository URL for configuration files
+          uri: https://github.com/Booking-Container/config-data.git  # Git repository URL for configuration files
           default-label: main  # Use the 'main' branch for fetching configurations
