@@ -8,7 +8,7 @@ spring:
   datasource:
     url: jdbc:postgresql://postgres-schedule:5432/schedule_db
     username: schedule_db
-    password: schedule_password12345@@
+    password: H@7zP!4xQw9^rS2mJf8L
     driver-class-name: org.postgresql.Driver
 
   jpa:

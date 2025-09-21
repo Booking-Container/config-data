@@ -1,13 +1,13 @@
 server:
-  port: 8084
+  port: 8086
 
 spring:
   application:
-    name: comparison-service
+    name: client-service
 
   datasource:
-    url: jdbc:postgresql://postgres-comparison:5432/comparison_db
-    username: comparison_db
+    url: jdbc:postgresql://postgres-client:5432/client_db
+    username: client_db
     password: H@7zP!4xQw9^rS2mJf8L
     driver-class-name: org.postgresql.Driver
 
