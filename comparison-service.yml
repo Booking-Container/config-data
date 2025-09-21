@@ -8,7 +8,7 @@ spring:
   datasource:
     url: jdbc:postgresql://postgres-comparison:5432/comparison_db
     username: comparison_db
-    password: comparison_password12345@@
+    password: "H@7zP!4xQw9^rS2mJf8L"
     driver-class-name: org.postgresql.Driver
 
   jpa:

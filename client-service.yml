@@ -1,13 +1,13 @@
 server:
-  port: 8084
+  port: 8086
 
 spring:
   application:
-    name: setting-service
+    name: client-service
 
   datasource:
-    url: jdbc:postgresql://postgres-setting:5432/setting_db
-    username: setting_db
+    url: jdbc:postgresql://postgres-client:5432/client_db
+    username: client_db
     password: "H@7zP!4xQw9^rS2mJf8L"
     driver-class-name: org.postgresql.Driver
 
