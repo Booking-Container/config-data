@@ -1,3 +1,4 @@
+# In Config Server - user-service.yml
 server:
   port: 8082  # Port where the user service will run
 
@@ -16,6 +17,31 @@ spring:
       ddl-auto: update
     show-sql: true
     database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+  # ADD EMAIL CONFIGURATION HERE
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: devhicham00@gmail.com
+    password: xvrqfdgwqejuwuwm
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+        debug: false
+
+# ADD APPLICATION-SPECIFIC CONFIG
+app:
+  activation:
+    token:
+      expiry-hours: 24
+  email:
+    from: ${EMAIL_FROM:noreply@bc.com}
+    activation-subject: "Activate Your Booking Container Account"
+  frontend:
+    url: ${FRONTEND_URL:https://192.168.1.202:4000}
 
 eureka:
   client:
