@@ -41,7 +41,7 @@ app:
     from: ${EMAIL_FROM:noreply@bc.com}
     activation-subject: "Activate Your Booking Container Account"
   frontend:
-    url: ${FRONTEND_URL:https://192.168.1.202:4000}
+    url: ${FRONTEND_URL:https://192.168.151.122:7000}
 
 eureka:
   client:
