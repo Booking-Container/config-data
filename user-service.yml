@@ -32,6 +32,23 @@ spring:
             enable: true
         debug: false
 
+  # ADD RABBITMQ CONFIGURATION HERE
+  rabbitmq:
+    host: rabbitmq
+    port: 5672
+    username: bc.rabbit@msg.com
+    password: "D8@zP!4xQw9^rS2mKf8J"
+    template:
+      retry:
+        enabled: true
+        initial-interval: 2s
+        max-attempts: 3
+    listener:
+      simple:
+        retry:
+          enabled: true
+          initial-interval: 2s
+          max-attempts: 3
 # ADD APPLICATION-SPECIFIC CONFIG
 app:
   activation:
