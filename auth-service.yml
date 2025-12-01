@@ -20,7 +20,7 @@ spring:
   redis:
     host: redis-cache
     port: 6379
-    password: "w@7zP!4xQw9^rA8uJf8L"
+    password: "w@7zPQ4xQw9^rA8uJf8L"
     timeout: 5000ms
     lettuce:
       pool:
