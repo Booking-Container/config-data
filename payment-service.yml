@@ -1,0 +1,133 @@
+# ===================== Payment Service Configuration ==========================
+server:
+  port: ${PAYMENT_SERVICE_PORT:8087}
+
+spring:
+  application:
+    name: payment-service
+
+  datasource:
+    url: ${POSTGRES_PAYMENT_URL:jdbc:postgresql://postgres-payment:5432/payment_db}
+    username: ${POSTGRES_PAYMENT_USER:payment_db}
+    password: ${POSTGRES_PAYMENT_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 5
+      connection-timeout: 30000
+      idle-timeout: 600000
+      max-lifetime: 1800000
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+        jdbc:
+          batch_size: 20
+        order_inserts: true
+        order_updates: true
+    show-sql: ${SHOW_SQL:false}
+
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+    locations: classpath:db/migration
+    validate-on-migrate: true
+
+  rabbitmq:
+    host: ${RABBITMQ_HOST:rabbitmq}
+    port: ${RABBITMQ_PORT:5672}
+    username: ${RABBITMQ_LOGIN}
+    password: ${RABBITMQ_PASSWORD}
+    listener:
+      simple:
+        retry:
+          enabled: true
+          max-attempts: 3
+          initial-interval: 3000
+          multiplier: 2.0
+          max-interval: 10000
+
+  redis:
+    host: ${REDIS_HOST:redis-cache}
+    port: ${REDIS_PORT:6379}
+    password: ${REDIS_PASSWORD}
+    timeout: 60000
+    lettuce:
+      pool:
+        max-active: 10
+        max-idle: 5
+        min-idle: 2
+        max-wait: -1ms
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${JWT_ISSUER_URI}
+          jwk-set-uri: ${JWT_JWK_SET_URI}
+
+payzone:
+  merchant:
+    account: ${PAYZONE_MERCHANT_ACCOUNT}
+  paywall:
+    secret-key: ${PAYZONE_PAYWALL_SECRET_KEY}
+    url: ${PAYZONE_PAYWALL_URL}
+  notification:
+    key: ${PAYZONE_NOTIFICATION_KEY}
+  api:
+    url: ${PAYZONE_API_URL}
+    key: ${PAYZONE_API_KEY}
+    caller-name: ${PAYZONE_API_CALLER_NAME}
+
+brevo:
+  api:
+    key: ${BREVO_API_KEY}
+    url: https://api.brevo.com
+
+app:
+  name: payment-service
+  version: 1.0.0
+  environment: ${APP_ENV:development}
+
+  payment:
+    success-url: ${PAYMENT_SUCCESS_URL}
+    cancel-url: ${PAYMENT_CANCEL_URL}
+    notification-url: ${PAYMENT_NOTIFICATION_URL}
+    timeout-minutes: 30
+
+  email:
+    sender: ${EMAIL_SENDER}
+    sender-name: ${EMAIL_SENDER_NAME}
+    support-email: ${SUPPORT_EMAIL}
+
+  frontend:
+    url: ${FRONTEND_WEBSITE_URL}
+
+  services:
+    user-service: ${USER_SERVICE_URL:http://user-service:8082}
+    client-service: ${CLIENT_SERVICE_URL:http://client-service:8086}
+
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 5000
+        readTimeout: 10000
+        loggerLevel: basic
+      user-service:
+        connectTimeout: 3000
+        readTimeout: 5000
+      client-service:
+        connectTimeout: 3000
+        readTimeout: 5000
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: ${DISCOVERY_SERVICE_URL:http://discovery-service:8761/eureka/}
