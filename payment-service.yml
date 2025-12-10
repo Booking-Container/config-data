@@ -35,7 +35,7 @@ spring:
     enabled: true
     baseline-on-migrate: true
     locations: classpath:db/migration
-    validate-on-migrate: true
+    validate-on-migrate: false
 
   rabbitmq:
     host: rabbitmq
@@ -78,7 +78,7 @@ payzone:
 
 brevo:
   api:
-    key: ${BREVO_API_KEY}
+    key: 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
     url: https://api.brevo.com
 
 app:
