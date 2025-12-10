@@ -1,6 +1,6 @@
 # ===================== Payment Service Configuration ==========================
 server:
-  port: ${PAYMENT_SERVICE_PORT:8087}
+  port: 8087
 
 spring:
   application:
