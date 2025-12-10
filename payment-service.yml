@@ -63,29 +63,22 @@ spring:
         min-idle: 2
         max-wait: -1ms
 
-  security:
-    oauth2:
-      resourceserver:
-        jwt:
-          issuer-uri: ${JWT_ISSUER_URI}
-          jwk-set-uri: ${JWT_JWK_SET_URI}
-
 payzone:
   merchant:
-    account: ${PAYZONE_MERCHANT_ACCOUNT}
+    account: Booking_container_test
   paywall:
-    secret-key: ${PAYZONE_PAYWALL_SECRET_KEY}
-    url: ${PAYZONE_PAYWALL_URL}
+    secret-key: wE4zBJiqE7AZjNtBX63
+    url: https://payment-sandbox.payzone.ma/pwthree/launch
   notification:
-    key: ${PAYZONE_NOTIFICATION_KEY}
+    key: OdpJ8O6PrO^2lsaFCo
   api:
-    url: ${PAYZONE_API_URL}
-    key: ${PAYZONE_API_KEY}
-    caller-name: ${PAYZONE_API_CALLER_NAME}
+    url: https://payment-sandbox.payzone.ma/api/v3/charges
+    key: 4dff7600c593c444283de627QQ
+    caller-name: $apicaller
 
 brevo:
   api:
-    key: ${BREVO_API_KEY}
+    key: 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
     url: https://api.brevo.com
 
 app:
@@ -94,18 +87,15 @@ app:
   environment: ${APP_ENV:development}
 
   payment:
-    success-url: ${PAYMENT_SUCCESS_URL}
-    cancel-url: ${PAYMENT_CANCEL_URL}
-    notification-url: ${PAYMENT_NOTIFICATION_URL}
+    success-url: https://app.booking-container.com/payment/success
+    cancel-url: https://app.booking-container.com/payment/cancel
+    notification-url: https://api.booking-container.com/payment/api/v1/payments/payzone/notify
     timeout-minutes: 30
 
   email:
-    sender: ${EMAIL_SENDER}
-    sender-name: ${EMAIL_SENDER_NAME}
-    support-email: ${SUPPORT_EMAIL}
-
-  frontend:
-    url: ${FRONTEND_WEBSITE_URL}
+    sender: nizar@booking-container.com
+    sender-name: Booking Container
+    support-email: support@booking-container.com
 
   services:
     user-service: http://user-service:8082
