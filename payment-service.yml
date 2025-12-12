@@ -6,6 +6,10 @@ spring:
   application:
     name: payment-service
 
+  cloud:
+    config:
+      uri: http://config-service:8888
+
   datasource:
     url: jdbc:postgresql://postgres-payment:5432/payment_db  # PostgreSQL URL for auth service
     username: payment_db
@@ -87,8 +91,8 @@ app:
   environment: ${APP_ENV:development}
 
   payment:
-    success-url: https://app.booking-container.com/payment/success
-    cancel-url: https://app.booking-container.com/payment/cancel
+    success-url: https://booking-container.com/payment/success
+    cancel-url: https://booking-container.com/payment/cancel
     notification-url: https://api.booking-container.com/payment/api/v1/payments/payzone/notify
     timeout-minutes: 30
 
@@ -100,6 +104,9 @@ app:
   services:
     user-service: http://user-service:8082
     client-service:  http://client-service:8086
+
+  frontend:
+    url: https://booking-container.com
 
 feign:
   client:
@@ -121,3 +128,4 @@ eureka:
     fetch-registry: true
     service-url:
       defaultZone: http://discovery-service:8761/eureka/  # Eureka server URI
+
