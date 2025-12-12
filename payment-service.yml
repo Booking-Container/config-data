@@ -88,9 +88,9 @@ app:
 
   # All app properties at same indentation level
   payment:
-    success-url: https://app.booking-container.com/payment/success
-    cancel-url: https://app.booking-container.com/payment/cancel
-    notification-url: https://api.booking-container.com/payment/api/v1/payments/payzone/notify
+    success-url: https://192.168.1.202:8881/api/v1/payments/success
+    cancel-url: https://192.168.1.202:8881/api/v1/payments/cancel
+    notification-url: https://192.168.1.202:8881/api/v1/payments/payzone/notify
     timeout-minutes: 30
 
   email:
