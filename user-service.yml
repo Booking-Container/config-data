@@ -20,17 +20,17 @@ spring:
 
   # ADD EMAIL CONFIGURATION HERE
   mail:
-    host: smtp.gmail.com
+    host: smtp-relay.brevo.com
     port: 587
-    username: devhicham00@gmail.com
-    password: xvrqfdgwqejuwuwm
+    username: apikey
+    password: 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
     properties:
       mail:
         smtp:
           auth: true
           starttls:
             enable: true
-        debug: false
+            required: true
 
   # ADD RABBITMQ CONFIGURATION HERE
   rabbitmq:
