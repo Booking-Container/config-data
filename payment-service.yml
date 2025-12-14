@@ -77,10 +77,11 @@ payzone:
     caller-name: $apicaller
 
 brevo:
-  api:
-    key: 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
-    url: https://api.brevo.com
-
+  api-key: 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
+  sender:
+    email: no-reply@booking-container.com
+    name: Booking Container
+    
 app:
   name: payment-service
   version: 1.0.0
