@@ -79,6 +79,24 @@ app:
       expiry-hours: 24
   frontend:
     url: ${FRONTEND_URL:https://booking-container.com}
+    
+  services:
+    user-service: http://user-service:8082
+    client-service: http://client-service:8086
+
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 5000
+        readTimeout: 10000
+        loggerLevel: basic
+      user-service:
+        connectTimeout: 3000
+        readTimeout: 5000
+      client-service:
+        connectTimeout: 3000
+        readTimeout: 5000
 
 eureka:
   client:
