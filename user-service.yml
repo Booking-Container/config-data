@@ -18,19 +18,12 @@ spring:
     show-sql: true
     database-platform: org.hibernate.dialect.PostgreSQLDialect
 
-  # ADD EMAIL CONFIGURATION HERE
-  mail:
-    host: smtp-relay.brevo.com
-    port: 587
-    username: apikey
-    password: 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
-    properties:
-      mail:
-        smtp:
-          auth: true
-          starttls:
-            enable: true
-            required: true
+# EMAIL CONFIGURATION
+brevo:
+  api-key: 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
+  sender:
+    email: no-reply@booking-container.com
+    name: Booking Container
 
   # ADD RABBITMQ CONFIGURATION HERE
   rabbitmq:
@@ -49,16 +42,17 @@ spring:
           enabled: true
           initial-interval: 2s
           max-attempts: 3
+          
 # ADD APPLICATION-SPECIFIC CONFIG
 app:
   activation:
     token:
       expiry-hours: 24
   email:
-    from: ${EMAIL_FROM:noreply@bc.com}
+    from: ${EMAIL_FROM:no-reply@booking-container.com}
     activation-subject: "Activate Your Booking Container Account"
   frontend:
-    url: ${FRONTEND_URL:https://192.168.151.122:7000}
+    url: ${FRONTEND_URL:https://booking-container.com}
 
 eureka:
   client:
