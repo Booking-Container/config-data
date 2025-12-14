@@ -1,13 +1,12 @@
-# In Config Server - user-service.yml
 server:
-  port: 8082  # Port where the user service will run
+  port: 8082
 
 spring:
   application:
-    name: user-service  # Service name
+    name: user-service
 
   datasource:
-    url: jdbc:postgresql://postgres-user:5432/user_db  # PostgreSQL URL for user service
+    url: jdbc:postgresql://postgres-user:5432/user_db
     username: user_db
     password: "H@7zP!4xQw9^rS2mJf8L"
     driver-class-name: org.postgresql.Driver
@@ -18,14 +17,7 @@ spring:
     show-sql: true
     database-platform: org.hibernate.dialect.PostgreSQLDialect
 
-# EMAIL CONFIGURATION
-brevo:
-  api-key: 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
-  sender:
-    email: no-reply@booking-container.com
-    name: Booking Container
-
-  # ADD RABBITMQ CONFIGURATION HERE
+# RabbitMQ Configuration
   rabbitmq:
     host: rabbitmq
     port: 5672
@@ -42,21 +34,24 @@ brevo:
           enabled: true
           initial-interval: 2s
           max-attempts: 3
-          
-# ADD APPLICATION-SPECIFIC CONFIG
+
+# Brevo / Email configuration
+brevo:
+  api-key: ${BREVO_API_KEY}  # Never hardcode production API key
+  sender:
+    email: no-reply@booking-container.com
+    name: Booking Container
+
 app:
   activation:
     token:
       expiry-hours: 24
-  email:
-    from: ${EMAIL_FROM:no-reply@booking-container.com}
-    activation-subject: "Activate Your Booking Container Account"
   frontend:
     url: ${FRONTEND_URL:https://booking-container.com}
 
 eureka:
   client:
-    register-with-eureka: true  # Register the user service with Eureka
+    register-with-eureka: true
     fetch-registry: true
     service-url:
-      defaultZone: http://discovery-service:8761/eureka/  # Eureka server URI
+      defaultZone: http://discovery-service:8761/eureka/
