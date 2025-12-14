@@ -1,3 +1,4 @@
+# ===================== Payment Service Configuration ==========================
 server:
   port: 8087
 
@@ -8,14 +9,27 @@ spring:
   datasource:
     url: jdbc:postgresql://postgres-payment:5432/payment_db
     username: payment_db
-    password: ${POSTGRES_USER_PASSWORD}
+    password: "H@7zP!4xQw9^rS2mJf8L"
     driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 5
+      connection-timeout: 30000
+      idle-timeout: 600000
+      max-lifetime: 1800000
 
   jpa:
     hibernate:
-      ddl-auto: update
-    show-sql: true
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
+      ddl-auto: validate
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+        jdbc:
+          batch_size: 20
+        order_inserts: true
+        order_updates: true
+    show-sql: ${SHOW_SQL:false}
 
   flyway:
     enabled: true
@@ -23,28 +37,24 @@ spring:
     locations: classpath:db/migration
     validate-on-migrate: false
 
-# RabbitMQ Configuration
   rabbitmq:
     host: rabbitmq
     port: 5672
-    username: ${RABBITMQ_LOGIN}
-    password: ${RABBITMQ_PASSWORD}
-    template:
-      retry:
-        enabled: true
-        initial-interval: 2s
-        max-attempts: 3
+    username: bc.rabbit@msg.com
+    password: "D8@zP!4xQw9^rS2mKf8J"
     listener:
       simple:
         retry:
           enabled: true
-          initial-interval: 2s
           max-attempts: 3
+          initial-interval: 3000
+          multiplier: 2.0
+          max-interval: 10000
 
   redis:
     host: redis-cache
     port: 6379
-    password: ${REDIS_PASSWORD}
+    password: "w@7zPQ4xQw9^rA8uJf8L"
     timeout: 60000
     lettuce:
       pool:
@@ -52,34 +62,46 @@ spring:
         max-idle: 5
         min-idle: 2
         max-wait: -1ms
-# Brevo / Email configuration
-brevo:
-  api-key: ${BREVO_API_KEY} 
-  sender:
-    email: no-reply@booking-container.com
-    name: Booking Container
 
-# Payzone Configuration
 payzone:
   merchant:
-    account: ${PAYZONE_MERCHANT_ACCOUNT}
+    account: Booking_container_test
   paywall:
-    secret-key: ${PAYZONE_PAYWALL_SECRET_KEY}
-    url: ${PAYZONE_PAYWALL_URL}
+    secret-key: wE4zBJiqE7AZjNtBX63
+    url: https://payment-sandbox.payzone.ma/pwthree/launch
   notification:
-    key: ${PAYZONE_NOTIFICATION_KEY}
+    key: OdpJ8O6PrO^2lsaFCo
   api:
-    url: ${PAYZONE_API_URL}
-    key: ${PAYZONE_API_KEY}
-    caller-name: ${PAYZONE_API_CALLER_NAME}
+    url: https://payment-sandbox.payzone.ma/api/v3/charges
+    key: 4dff7600c593c444283de627QQ
+    caller-name: $apicaller
+
+brevo:
+  api:
+    key: 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
+    url: https://api.brevo.com
 
 app:
-  activation:
-    token:
-      expiry-hours: 24
+  name: payment-service
+  version: 1.0.0
+  environment: ${APP_ENV:development}
+
+  # All app properties at same indentation level
+  payment:
+    success-url: https://192.168.1.202:8881/api/v1/payments/success
+    cancel-url: https://192.168.1.202:8881/api/v1/payments/cancel
+    notification-url: https://192.168.1.202:8881/api/v1/payments/payzone/notify
+    timeout-minutes: 30
+
+  email:
+    sender: nizar@booking-container.com
+    sender-name: Booking Container
+    support-email: support@booking-container.com
+
+  # ADD THIS - required by EmailServiceImpl
   frontend:
-    url: ${FRONTEND_URL:https://booking-container.com}
-    
+    url: https://app.booking-container.com
+
   services:
     user-service: http://user-service:8082
     client-service: http://client-service:8086
